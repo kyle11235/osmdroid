@@ -3,6 +3,7 @@ package com.example.osmdroid.service.impl;
 import android.content.Context;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.example.osmdroid.service.MapService;
 
@@ -14,6 +15,8 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
 public class MapServiceImpl implements MapService {
+
+    public static final String TAG = "HOOK";
 
     private MapView map;
     private IMapController mapController;
@@ -33,7 +36,8 @@ public class MapServiceImpl implements MapService {
 
 
     @Override
-    public Boolean addMarker(double lat, double lng, String title) {
+    public Boolean addMarker(Double lat, Double lng, String title) {
+        Log.d( TAG, "addMarker=" + lat.toString() + "," + lng.toString() + ",title=" + title);
         if(map == null){
             return false;
         }
@@ -60,7 +64,8 @@ public class MapServiceImpl implements MapService {
     }
 
     @Override
-    public void moveTo(double lat, double lng) {
+    public void moveTo(Double lat, Double lng) {
+        Log.d( TAG, "moveTo=" + lat.toString() + "," + lng.toString());
         GeoPoint p = new GeoPoint(lat,lng);
         mapController.setCenter(p);
     }
@@ -72,6 +77,7 @@ public class MapServiceImpl implements MapService {
 
     @Override
     public void clear() {
+        Log.d( TAG, "clear");
         map.getOverlays().clear();
     }
 }
